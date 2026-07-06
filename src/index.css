@@ -1,0 +1,72 @@
+/* ===========================================================
+   Beertopia 🍺 — Pub & Amber Theme
+   Base / foundation styles + design tokens
+   =========================================================== */
+
+/* Fonts: slab serif for headings, clean sans for body */
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Nunito+Sans:wght@400;600;700&display=swap');
+
+:root {
+  /* Colors */
+  --cream:        #FDF6E3;  /* page background */
+  --cream-deep:   #F3E9CE;  /* subtle panels */
+  --wood-brown:   #3E2723;  /* headings / dark text */
+  --wood-soft:    #5D4037;  /* body text */
+  --amber:        #C8860D;  /* primary accent (pint of ale) */
+  --amber-bright: #E9A825;  /* hover / highlights */
+  --foam:         #FFF8E7;  /* card surfaces */
+  --border:       #E0D2A8;  /* hairlines */
+
+  /* Type */
+  --font-heading: 'Alfa Slab One', Georgia, serif;
+  --font-body:    'Nunito Sans', system-ui, sans-serif;
+
+  color-scheme: light;
+  color: var(--wood-soft);
+  background-color: var(--cream);
+
+  font-family: var(--font-body);
+  line-height: 1.6;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--cream);
+  /* faint warm texture behind the page */
+  background-image: radial-gradient(circle at 50% 0%, #fbecc4 0%, var(--cream) 60%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--wood-brown);
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+}
+
+a {
+  color: var(--amber);
+  text-decoration: none;
+  font-weight: 700;
+}
+a:hover {
+  color: var(--amber-bright);
+  text-decoration: underline;
+}
+
+button {
+  font-family: var(--font-body);
+  font-weight: 700;
+  cursor: pointer;
+}

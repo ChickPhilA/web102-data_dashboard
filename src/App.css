@@ -1,0 +1,87 @@
+/* ===========================================================
+   Beertopia 🍺 — App / page styling (Pub & Amber Theme)
+   =========================================================== */
+
+#root {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  text-align: center;
+}
+
+/* --- Hero header --- */
+h1 {
+  margin: 1.5rem 0 0.25rem;
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  color: var(--amber);
+  /* warm layered shadow so the title reads like a carved pub sign */
+  text-shadow:
+    2px 2px 0 var(--wood-brown),
+    4px 5px 8px rgba(62, 39, 35, 0.35);
+}
+
+h2 {
+  margin: 0 auto 2rem;
+  max-width: 40ch;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  color: var(--wood-soft);
+}
+
+/* decorative amber divider under the intro */
+h2::after {
+  content: "🍺 · 🍺 · 🍺";
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.35em;
+  opacity: 0.7;
+}
+
+/* --- Brewery card grid (ready for when you render the data) --- */
+.brewery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.brewery-card {
+  background: var(--foam);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  box-shadow: 0 4px 14px rgba(62, 39, 35, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.brewery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(62, 39, 35, 0.16);
+  border-color: var(--amber);
+}
+
+.brewery-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.15rem;
+}
+
+.brewery-card .brewery-type {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.15rem 0.65rem;
+  border-radius: 999px;
+  background: var(--amber);
+  color: var(--foam);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.brewery-card p {
+  margin: 0.2rem 0;
+  font-size: 0.92rem;
+  color: var(--wood-soft);
+}
