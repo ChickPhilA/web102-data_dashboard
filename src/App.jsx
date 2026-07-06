@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from "axios"
 import './App.css'
-import BeerData from './components/BeerData.jsx'
+import SummaryStats from './components/SummaryStats.jsx'
 
 function App() {
   const [breweryData, setBreweryData] = useState([])
@@ -50,7 +50,7 @@ function App() {
           breweryDict.set(breweryData[i].brewery_type, 1)
         }
         else {
-          breweryDict.set([breweryData[i].brewery_type], breweryData[i].brewery_type++)
+          breweryDict.set(breweryData[i].brewery_type, breweryDict.get(breweryData[i].brewery_type) + 1)
         }
       }
     }
@@ -69,18 +69,50 @@ function App() {
     }
   }
 
-  breweryTypeFrequency()
-  countUniqueCities()
+  const mostCommonBrewery = (dict) => {
+    let topType = "N/A"
+    let topCount = 0
+    for (const [type, count] of dict) {
+      if (count > topCount) {
+        topCount = count
+        topType = type
+      }
+    }
+    return topType
+  }
+
+  breweryTypeFrequency()          // fills breweryDict
+  countUniqueCities()             // fills uniqueCities
+  const topBrewery = mostCommonBrewery(breweryDict)
 
   return (
     <>
      <h1> Beertopia 🍺 </h1>
      <h2> Find information about local and global pubs around you!</h2>
-     <BeerData data={breweryData}
-        brewCount={totalBreweries}
-        brewFreq={breweryDict}
-        cities={uniqueCities}
-      />
+     <SummaryStats brewCount={totalBreweries} mostCommon={topBrewery} cities={uniqueCities} />
+
+     <table>
+       <thead>
+         <tr>
+           <th>Name</th>
+           <th>Type</th>
+           <th>City</th>
+           <th>State</th>
+           <th>Country</th>
+         </tr>
+       </thead>
+       <tbody>
+         {breweryData.map((brewery) => (
+           <tr key={brewery.id}>
+             <td>{brewery.name}</td>
+             <td>{brewery.brewery_type}</td>
+             <td>{brewery.city}</td>
+             <td>{brewery.state}</td>
+             <td>{brewery.country}</td>
+           </tr>
+         ))}
+       </tbody>
+     </table>
     </>
   )
 }
