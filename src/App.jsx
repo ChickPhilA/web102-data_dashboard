@@ -88,7 +88,8 @@ function App() {
 
 
   const filteredBreweries = breweryData.filter((b) => 
-    b.name.toLowerCase().includes(searchInput.toLowerCase())
+    b.name.toLowerCase().includes(searchInput.toLowerCase()) &&
+    (breweryType === "" || b.brewery_type === breweryType)
   )
 
   return (
@@ -105,6 +106,15 @@ function App() {
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
        />
+
+       <select className="type-filter" value={breweryType} onChange={(e) => setBreweryType(e.target.value)}>
+          <option value="">All Types</option>
+          {[...breweryDict.keys()].map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+          ))}
+       </select>
      </div>
 
      <table className="brewery-table">
