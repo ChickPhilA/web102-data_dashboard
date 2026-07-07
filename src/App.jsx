@@ -8,6 +8,7 @@ function App() {
   const [searchInput, setSearchInput] = useState('')
   const [breweryType, setBreweryType] = useState('') /* use for setting country when choosing pub */
 
+
   const URL = "https://api.openbrewerydb.org/v1/breweries"
 
   /* Statistic variables */
@@ -85,13 +86,28 @@ function App() {
   countUniqueCities()             // fills uniqueCities
   const topBrewery = mostCommonBrewery(breweryDict)
 
+
+  const filteredBreweries = breweryData.filter((b) => 
+    b.name.toLowerCase().includes(searchInput.toLowerCase())
+  )
+
   return (
     <>
-     <h1> Beertopia 🍺 </h1>
+     <h1> Pubtopia 🍺 </h1>
      <h2> Find information about local and global pubs around you!</h2>
      <SummaryStats brewCount={totalBreweries} mostCommon={topBrewery} cities={uniqueCities} />
 
-     <table>
+     <div className="controls">
+       <input
+        className="search-bar"
+        type="text"
+        placeholder="🔍  Search brewery by name..."
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+       />
+     </div>
+
+     <table className="brewery-table">
        <thead>
          <tr>
            <th>Name</th>
@@ -102,7 +118,7 @@ function App() {
          </tr>
        </thead>
        <tbody>
-         {breweryData.map((brewery) => (
+         {filteredBreweries.map((brewery) => (
            <tr key={brewery.id}>
              <td>{brewery.name}</td>
              <td>{brewery.brewery_type}</td>
